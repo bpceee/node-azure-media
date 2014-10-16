@@ -1,6 +1,6 @@
 # Azure Media for Node.js
-## Attention
-Many bugs. Still working on it!
+
+**Attention!!! Many bugs. Still working on it..**
 
 Azure's Media REST API provides a way to store, encode, and deliver media (video and images).
 This library makes using the API easier.
