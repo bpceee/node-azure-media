@@ -13,29 +13,54 @@ api.init(function (err, token) {
 //      console.log(result.asset.Id);
 //  });
 
-  api.media.getDownloadURL("nb:cid:UUID:f1951d6d-9f9f-4368-924c-6c7122432fb7", function (err, url) {
+  api.media.getDownloadURL("nb:cid:UUID:c06f9707-3c0e-4b46-b88b-3cd95fd9ae18", function (err, url) {
     console.log(url);
   });
 
-//  api.media.encodeVideo("nb:cid:UUID:4f14d3e3-52ac-4cf0-b631-290049a8a852", 'H264 Broadband 720p', function (err, job, asset) {
+//    api.media.getOriginURL("nb:cid:UUID:a85998e1-da34-4e59-88f7-7da812dd8cb4", function (err, url) {
+//    console.log(url);
+//  });
+
+
+//  api.media.encodeVideo("nb:cid:UUID:c06f9707-3c0e-4b46-b88b-3cd95fd9ae18", 'H264 Adaptive Bitrate MP4 Set 720p', function (err, job, asset) {
 //    console.log(err || job.toJSON());
 //    console.log(asset.toJSON())
+//    api.rest.job.listOutputMediaAssets(job.toJSON().Id, function (err, assets){
+//      console.log(assets.length)
+//      console.log(assets[0].toJSON())
+//    })
 //  });
+
+
 
 //  api.rest.asset.get("nb:cid:UUID:4dfecb13-b8bc-4e69-adad-7947356b9c5a", function (err, result) {
 //    console.log(err||result.toJSON())
 //  });
 
+//    api.rest.task.get("nb:tid:UUID:69b3f40a-63b1-4fc9-9aa7-09bafca47d40", function (err, result) {
+//    console.log(err||result.toJSON())
+//  });
+
+//    api.rest.mediaprocessor.list(function (err, results) {
+//    console.log(results.length)
+//    results.forEach(function (res){
+//      console.log(res.toJSON())
+//    });
+//  });
+
 //  api.rest.asset.list(function (err, result) {
 //    console.log(err||result[0].toJSON())
-//  }, {'$filter': "Name eq 'Sample2.mp4-H264_Adaptive_Bitrate_MP4_Set_SD_16x9_iOS_Cellular-Output'"});
+//  }, {'$filter': "Name eq 'shit.mp4'"});
 
-//  api.rest.asset.listFiles("nb:cid:UUID:f1951d6d-9f9f-4368-924c-6c7122432fb7", function (err, result) {
+//  api.rest.asset.listFiles("nb:cid:UUID:e145d2c2-d610-4c03-9933-3ea1b695b5db", function (err, result) {
 //    console.log(err||result[0].toJSON())
 //  });
 
-//  api.rest.asset.listLocators("nb:cid:UUID:7f97e86f-7cfc-4760-b1ff-57d071ccdc49", function (err, result) {
-//    console.log(err||result[0].toJSON())
+//  api.rest.asset.listLocators("nb:cid:UUID:4dfecb13-b8bc-4e69-adad-7947356b9c5a", function (err, results) {
+//    console.log(results.length)
+//    results.forEach(function (res){
+//      console.log(res.toJSON().Path)
+//    });
 //  });
 
 //  api.rest.assetfile.list(function (err, results) {
@@ -56,7 +81,6 @@ api.init(function (err, token) {
 ////        console.log(res.toJSON())
 ////      });
 //    }, {$orderby: 'Created desc'});
-
 
 });
 

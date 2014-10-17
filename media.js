@@ -124,34 +124,47 @@ function AzureBlob(api) {
         }.bind(this));
     };
 
+    this.getUrl = function (assetId, locatorType, done_cb) {
+      async.waterfall([
+        function (cb) {
+          this.api.rest.accesspolicy.findOrCreate(60, 1, function (err, result) {
+            cb(err, result);
+          }.bind(this));
+        }.bind(this),
+        function (policy, cb) {
+          this.api.rest.locator.create({AccessPolicyId: policy.Id, AssetId: assetId, StartTime: moment.utc().subtract(5, 'minutes').format('MM/DD/YYYY hh:mm:ss A'), Type: locatorType}, function (err, locator) {
+            cb(err, locator);
+          }.bind(this));
+        }.bind(this),
+        function (locator, cb) {
+          this.api.rest.assetfile.list(function (err, results) {
+            if (results.length > 0) {
+              cb(false, locator, results[0]);
+            } else {
+              cb("No files associated with asset.");
+            }
+          }.bind(this), {$filter: "ParentAssetId eq '" + assetId + "'", $orderby: 'Created desc', $top: 1});
+        }.bind(this),
+      ], function (err, locator, fileasset) {
+        var path = locator.Path;
+        var parsedpath = url.parse(path);
+        if (locatorType == 1)
+          parsedpath.pathname += '/' + fileasset.Name;
+        else if(locatorType == 2)
+          parsedpath.pathname += (fileasset.Name.slice(0, -13) + '.ism/Manifest');
+        else
+          done_cb("unknow locatorType");
+        path = url.format(parsedpath);
+        done_cb(err, path);
+      }.bind(this));
+    }
+
     this.getDownloadURL = function (assetId, done_cb) {
-        async.waterfall([
-            function (cb) {
-                this.api.rest.accesspolicy.findOrCreate(60, 1, function (err, result) {
-                    cb(err, result);
-                }.bind(this));
-            }.bind(this),
-            function (policy, cb) {
-                this.api.rest.locator.create({AccessPolicyId: policy.Id, AssetId: assetId, StartTime: moment.utc().subtract(5, 'minutes').format('MM/DD/YYYY hh:mm:ss A'), Type: 1}, function (err, locator) {
-                    cb(err, locator);
-                }.bind(this));
-            }.bind(this),
-            function (locator, cb) {
-                this.api.rest.assetfile.list(function (err, results) {
-                    if (results.length > 0) {
-                        cb(false, locator, results[0]);
-                    } else {
-                        cb("No files associated with asset.");
-                    }
-                }.bind(this), {$filter: "ParentAssetId eq '" + assetId + "'", $orderby: 'Created desc', $top: 1});
-            }.bind(this),
-        ], function (err, locator, fileasset) {
-            var path = locator.Path;
-            var parsedpath = url.parse(path);
-            parsedpath.pathname += '/' + fileasset.Name;
-            path = url.format(parsedpath);
-            done_cb(err, path);
-        }.bind(this));
+      this.getUrl(assetId, 1, done_cb);
+    };
+
+    this.getOriginURL = function (assetId, done_cb) {
+      this.getUrl(assetId, 2, done_cb);
     };
 
     this.getAssetByName = function () {
