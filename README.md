@@ -120,7 +120,7 @@ Some models have extra ORM-like methods, allowing you to interact with the model
 
 ###uploadStream
 
-    api.uploadStream('somefile.mp4', fs.createReadStream('/some/file.mp4'), fs.statSync('/some/file.mp4').size,     function (err, assetId) {
+    api.uploadStream('somefile.mp4', fs.createReadStream('/some/file.mp4'), fs.statSync('/some/file.mp4').size, function (err, assetId) {
         if(!err) {
             console.log("done uploading");
         }

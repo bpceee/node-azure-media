@@ -61,7 +61,7 @@ function AzureAPI(config) {
                 followRedirect: false, 
                 strictSSL: true
             }, function (err, res) {
-                if (res.statusCode === 301) {
+                if (!err && res.statusCode === 301) {
                     this.config.base_url = res.headers.location;
                     console.log("changing base url to",  this.config.base_url);
                 }
