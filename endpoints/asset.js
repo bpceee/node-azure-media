@@ -45,7 +45,6 @@ var calls = {
             strictSSL: true,
             qs: query
         }, function (err, res) {
-            console.log(err, res.statusCode);
             var objs = [];
             if (res.statusCode == 200) {
                 var data = JSON.parse(res.body).d.results;
@@ -70,7 +69,6 @@ var calls = {
             strictSSL: true,
             qs: query
         }, function (err, res) {
-            console.log(err, res.statusCode);
             var objs = [];
             if (res.statusCode == 200) {
                 var data = JSON.parse(res.body).d.results;
@@ -95,7 +93,6 @@ var calls = {
             strictSSL: true,
             qs: query
         }, function (err, res) {
-            console.log(err, res.statusCode);
             var objs = [];
             if (res.statusCode == 200) {
                 var data = JSON.parse(res.body).d.results;
@@ -120,7 +117,6 @@ var calls = {
             strictSSL: true,
             qs: query
         }, function (err, res) {
-            console.log(err, res.statusCode);
             var objs = [];
             if (res.statusCode == 200) {
                 var data = JSON.parse(res.body).d.results;
@@ -145,7 +141,6 @@ var calls = {
             strictSSL: true,
             qs: query
         }, function (err, res) {
-            console.log(err, res.statusCode);
             var obj = [];
             if (res.statusCode == 200) {
                 var data = JSON.parse(res.body).d;

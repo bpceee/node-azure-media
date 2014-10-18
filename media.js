@@ -124,15 +124,15 @@ function AzureBlob(api) {
         }.bind(this));
     };
 
-    this.getUrl = function (assetId, locatorType, done_cb) {
+    this.getUrl = function (assetId, duration, locatorType, done_cb) {
       async.waterfall([
         function (cb) {
-          this.api.rest.accesspolicy.findOrCreate(60, 1, function (err, result) {
+          this.api.rest.accesspolicy.findOrCreate(duration, 1, function (err, result) {
             cb(err, result);
           }.bind(this));
         }.bind(this),
         function (policy, cb) {
-          this.api.rest.locator.create({AccessPolicyId: policy.Id, AssetId: assetId, StartTime: moment.utc().subtract(5, 'minutes').format('MM/DD/YYYY hh:mm:ss A'), Type: locatorType}, function (err, locator) {
+          this.api.rest.locator.deleteAndCreate({AccessPolicyId: policy.Id, AssetId: assetId, StartTime: moment.utc().subtract(5, 'minutes').format('MM/DD/YYYY hh:mm:ss A'), Type: locatorType}, function (err, locator) {
             cb(err, locator);
           }.bind(this));
         }.bind(this),
@@ -159,12 +159,20 @@ function AzureBlob(api) {
       }.bind(this));
     }
 
-    this.getDownloadURL = function (assetId, done_cb) {
-      this.getUrl(assetId, 1, done_cb);
+    this.getDownloadURL = function (assetId, duration, done_cb) {
+      if(arguments.length == 2) {
+        done_cb = arguments[1];
+        duration = 60;
+      }
+      this.getUrl(assetId, duration, 1, done_cb);
     };
 
-    this.getOriginURL = function (assetId, done_cb) {
-      this.getUrl(assetId, 2, done_cb);
+    this.getOriginURL = function (assetId, duration, done_cb) {
+      if(arguments.length == 2) {
+        done_cb = arguments[1];
+        duration = 60;
+      }
+      this.getUrl(assetId, duration, 2, done_cb);
     };
 
     this.getAssetByName = function () {

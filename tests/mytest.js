@@ -7,15 +7,15 @@ api.init(function (err, token) {
   // do your work here or after this callback
   console.log(err||"got token")
 
-//  api.media.uploadStream('shit.mp4', fs.createReadStream('/Users/pengchengbi/Desktop/Sample2.mp4'), fs.statSync('/Users/pengchengbi/Desktop/Sample2.mp4').size,
+//  api.media.uploadStream('testshit.mp4', fs.createReadStream('/Users/pengchengbi/Desktop/testshit.mp4'), fs.statSync('/Users/pengchengbi/Desktop/testshit.mp4').size,
 //    function (err, path, result) {
 //  }, function (err, path, result) {
 //      console.log(result.asset.Id);
 //  });
 
-  api.media.getDownloadURL("nb:cid:UUID:c06f9707-3c0e-4b46-b88b-3cd95fd9ae18", function (err, url) {
-    console.log(url);
-  });
+//  api.media.getDownloadURL("nb:cid:UUID:720c66bb-27bb-4c57-b412-909f0ff5adad", function (err, url) {
+//    console.log(url);
+//  });
 
 //    api.media.getOriginURL("nb:cid:UUID:a85998e1-da34-4e59-88f7-7da812dd8cb4", function (err, url) {
 //    console.log(url);
@@ -30,7 +30,20 @@ api.init(function (err, token) {
 //      console.log(assets[0].toJSON())
 //    })
 //  });
+//
+//
 
+  api.rest.asset.listLocators("nb:cid:UUID:720c66bb-27bb-4c57-b412-909f0ff5adad", function (err, results) {
+    console.log(results.length)
+    results.forEach(function (res){
+      console.log(res.toJSON())
+    });
+  });
+
+
+//  api.rest.locator.delete("nb:lid:UUID:edbe9a16-dbd7-4df0-8f02-7d6866ca450b", function (err, result) {
+//    console.log(err||result.toJSON())
+//  });
 
 
 //  api.rest.asset.get("nb:cid:UUID:4dfecb13-b8bc-4e69-adad-7947356b9c5a", function (err, result) {
