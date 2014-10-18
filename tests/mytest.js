@@ -7,11 +7,10 @@ api.init(function (err, token) {
   // do your work here or after this callback
   console.log(err||"got token")
 
-//  api.media.uploadStream('testshit.mp4', fs.createReadStream('/Users/pengchengbi/Desktop/testshit.mp4'), fs.statSync('/Users/pengchengbi/Desktop/testshit.mp4').size,
-//    function (err, path, result) {
-//  }, function (err, path, result) {
-//      console.log(result.asset.Id);
-//  });
+  api.media.uploadStream('testshit.mp4', fs.createReadStream('/Users/pengchengbi/Desktop/testshit.mp4'), fs.statSync('/Users/pengchengbi/Desktop/testshit.mp4').size,
+    function (err, result){
+      console.log(result);
+  });
 
 //  api.media.getDownloadURL("nb:cid:UUID:720c66bb-27bb-4c57-b412-909f0ff5adad", function (err, url) {
 //    console.log(url);
@@ -33,12 +32,12 @@ api.init(function (err, token) {
 //
 //
 
-  api.rest.asset.listLocators("nb:cid:UUID:720c66bb-27bb-4c57-b412-909f0ff5adad", function (err, results) {
-    console.log(results.length)
-    results.forEach(function (res){
-      console.log(res.toJSON())
-    });
-  });
+//  api.rest.asset.listLocators("nb:cid:UUID:720c66bb-27bb-4c57-b412-909f0ff5adad", function (err, results) {
+//    console.log(results.length)
+//    results.forEach(function (res){
+//      console.log(res.toJSON())
+//    });
+//  });
 
 
 //  api.rest.locator.delete("nb:lid:UUID:edbe9a16-dbd7-4df0-8f02-7d6866ca450b", function (err, result) {
