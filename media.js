@@ -155,6 +155,10 @@ function AzureBlob(api) {
           }.bind(this), {$filter: "ParentAssetId eq '" + assetId + "'", $orderby: 'Created desc', $top: 1});
         }.bind(this),
       ], function (err, locator, fileasset) {
+        if (err) {
+          done_cb(err);
+          return;
+        }
         var path = locator.Path;
         var parsedpath = url.parse(path);
         if (locatorType == 1)
